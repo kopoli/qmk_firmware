@@ -76,10 +76,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,
-       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,NO_PIPE,KC_TRNS,
+       KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,        KC_F6,
+       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,ALGR(KC_NUBS),KC_TRNS,
        KC_TRNS,KC_HASH,NO_DLR, NO_LPRN,NO_RPRN,NO_GRV,
-       KC_TRNS,KC_PERC,NO_CIRC,NO_LBRC,NO_RBRC,NO_TILD,KC_TRNS,
+       KC_TRNS,KC_PERC,NO_CIRC,NO_LBRC,NO_RBRC,NO_TILD,      KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_INS,
                                                KC_TRNS,

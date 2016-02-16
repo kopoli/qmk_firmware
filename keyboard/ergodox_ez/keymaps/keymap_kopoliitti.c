@@ -14,7 +14,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   §    |   1  |   2  |   3  |   4  |   5  | 6    |           |   7  |   8  |   9  |   0  |   -  |   =  | Backsp |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |  F12 |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CAPS   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|   '    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         LT(MDIA,KC_GRV),KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_6,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_NO,
+        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_F12,
         KC_CAPS,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,        KC_NUBS,      KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,
         KC_LCTL,        KC_LGUI,      KC_LALT,MO(3),  MO(1),
@@ -57,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |           |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 | F12    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |   !  |   @  |   {  |   }  |   |  |      |           |      |   Up |   7  |   8  |   9  |   *  |  å     |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |   !  |   @  |   {  |   }  |   |  |  Gui+|           |      |   Up |   7  |   8  |   9  |   *  |  å     |
+ * |--------+------+------+------+------+------|  F12 |           |      |------+------+------+------+------+--------|
  * |        |   #  |   $  |   (  |   )  |   `  |------|           |------| Down |   4  |   5  |   6  |   +  |  "     |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |   %  |   ^  |   [  |   ]  |   ~  |   \  |           |      |   &  |   1  |   2  |   3  |   \  |        |
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [SYMB] = KEYMAP(
        // left hand
        KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,        KC_F6,
-       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,ALGR(KC_NUBS),KC_TRNS,
+       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,ALGR(KC_NUBS),LGUI(KC_F12),
        KC_TRNS,KC_HASH,NO_DLR, NO_LPRN,NO_RPRN,NO_GRV,
        KC_TRNS,KC_PERC,NO_CIRC,NO_LBRC,NO_RBRC,NO_TILD,      ALGR(NO_PLUS),
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
@@ -151,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
- *                                 ,------|------|-jk---|       |------+------+------.
+ *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
  *                                 |      |      |      |       |      |      |      |
@@ -216,7 +216,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 // Runs just one time when the keyboard initializes.
 void * matrix_init_user(void) {
-
+    return NULL;
 };
 
 // Runs constantly in the background, in a loop.
@@ -243,4 +243,5 @@ void * matrix_scan_user(void) {
             break;
     }
 
+    return NULL;
 };

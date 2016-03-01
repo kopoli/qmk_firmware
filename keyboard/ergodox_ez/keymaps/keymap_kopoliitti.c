@@ -57,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |           |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 | F12    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |   !  |   @  |   {  |   }  |   |  |  Gui+|           |      |   Up |   7  |   8  |   9  |   *  |  å     |
- * |--------+------+------+------+------+------|  F12 |           |      |------+------+------+------+------+--------|
+ * |        |   !  |   @  |   {  |   }  |   |  |      |           |      |   Up |   7  |   8  |   9  |   *  |  å     |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |   #  |   $  |   (  |   )  |   `  |------|           |------| Down |   4  |   5  |   6  |   +  |  "     |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |   %  |   ^  |   [  |   ]  |   ~  |   \  |           |      |   &  |   1  |   2  |   3  |   \  |        |
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [SYMB] = KEYMAP(
        // left hand
        KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,        KC_F6,
-       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,ALGR(KC_NUBS),LGUI(KC_F12),
+       KC_TRNS,KC_EXLM,NO_AT,  NO_LCBR,NO_RCBR,ALGR(KC_NUBS),KC_TRNS,
        KC_TRNS,KC_HASH,NO_DLR, NO_LPRN,NO_RPRN,NO_GRV,
        KC_TRNS,KC_PERC,NO_CIRC,NO_LBRC,NO_RBRC,NO_TILD,      ALGR(NO_PLUS),
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
@@ -141,8 +141,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |  Home  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |  PgUp  |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      | Gui+ |           |      |      |      |      |      |      |  PgUp  |
+ * |--------+------+------+------+------+------| F12  |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |  PgDn  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |  End   |
@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Special keymap
 [SPEC] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_F12),
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,

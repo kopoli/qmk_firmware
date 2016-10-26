@@ -1,4 +1,4 @@
-#include "ergodox_ez.h"
+#include "ergodox.h"
 #include "debug.h"
 #include "action_layer.h"
 #include "keymap_extras/keymap_nordic.h"
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
        KC_TRNS, KC_UP,   KC_7,   KC_8,    KC_9,    LSFT(KC_BSLS), KC_LBRC,
                 KC_DOWN, KC_4,   KC_5,    KC_6,    NO_PLUS, KC_RBRC,
-       KC_TRNS, NO_AMP,  KC_1,   KC_2,    KC_3,    ALGR(NO_PLUS), KC_TRNS,
+       KC_TRNS, NO_AMPR, KC_1,   KC_2,    KC_3,    ALGR(NO_PLUS), KC_TRNS,
                          KC_TRNS,KC_DOT,  KC_0,    NO_EQL,  KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,

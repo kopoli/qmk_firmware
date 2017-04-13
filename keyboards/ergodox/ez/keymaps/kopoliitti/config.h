@@ -4,6 +4,6 @@
 #include "../../config.h"
 
 #undef PRODUCT
-#define PRODUCT Ergodox Ez kopol 20161026
+#define PRODUCT Ergodox Ez kopol 20170413
 
 #endif

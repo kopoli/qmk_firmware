@@ -2,11 +2,14 @@
 #include "debug.h"
 #include "action_layer.h"
 #include "keymap_extras/keymap_nordic.h"
+#include "process_tap_dance.h"
 
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
 #define SPEC 3 // special keys
+
+#define MO1SW TD(0)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -38,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_F12,
         KC_CAPS,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT,        KC_NUBS,      KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,
-        KC_LCTL,        KC_LGUI,      KC_LALT,MO(3),  MO(1),
+        KC_LCTL,        KC_LGUI,      KC_LALT,MO(3),  MO1SW,
                                               ALT_T(KC_APP),  KC_INS,
                                                               KC_HOME,
                                                KC_SPC,KC_BSPC,KC_END,
@@ -47,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,       KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),KC_QUOT,
              KC_NO,       KC_N,   KC_M,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   RSFT_T(KC_ENT),
-                                  MO(1),  KC_LEFT,KC_DOWN,KC_UP,            KC_RIGHT,
+                                  MO1SW,  KC_LEFT,KC_DOWN,KC_UP,            KC_RIGHT,
              KC_DEL,      CTL_T(KC_ESC),
              KC_NO,
              KC_RALT,KC_LALT, KC_ENT
@@ -179,11 +182,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
-};
-
-
 // Macro to generate a macro which presses down the tab button and then a KC_F* button
 #define TAB_FN(ID) case ID:                                 \
     if (record->event.pressed) {                            \
@@ -214,32 +212,68 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     return MACRO_NONE;
 };
 
-// Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {
-};
-
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
-
+static void set_leds(void) {
     uint8_t layer = biton32(layer_state);
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            ergodox_right_led_2_on();
-            break;
-        case 3:
-            ergodox_right_led_3_on();
-        default:
-            // none
-            break;
+
+    if (layer < 1 || layer > 3) {
+        return;
     }
 
+    layer = 1 << (layer - 1);
+
+    if (swap_hands) {
+        layer = ~layer;
+    }
+
+    for (uint8_t led = 0; led < 3; led++) {
+        if (layer & (1 << led)) {
+            ergodox_right_led_on(led + 1);
+        }
+    }
+}
+
+// Tap dance functionality
+static void handle_mode_swap_hands(qk_tap_dance_state_t *state, void *user_data) {
+    switch (state->count) {
+    case 1:
+            layer_on(1);
+        break;
+    case 2:
+        swap_hands = !swap_hands;
+        break;
+    default:
+        break;
+    }
+    set_leds();
+}
+
+static void handle_mode_swap_hands_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (state->count) {
+    case 1:
+        layer_off(1);
+        break;
+    default:
+        break;
+    }
+    set_leds();
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [0]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, handle_mode_swap_hands, handle_mode_swap_hands_reset),
+};
+
+
+
+// Runs just one time when the keyboard initializes.
+void matrix_init_user(void) {
+};
+
+// Runs constantly in the background, in a loop.
+void matrix_scan_user(void) {
+    set_leds();
 };
